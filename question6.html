@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>问题 6</title>
+    <style>
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: #fff9f9;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        h2 {
+            color: #e75480;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 22px;
+        }
+        label {
+            display: block;
+            padding: 14px;
+            margin: 12px 0;
+            background: #fff5f7;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        label:hover {
+            background: #ffebee;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <h2>恋爱中你最怕什么？</h2>
+    <label><input type="radio" name="ans" value="1" onchange="goToNextPage('question7.html')" /> A. 争吵</label>
+    <label><input type="radio" name="ans" value="2" onchange="goToNextPage('question7.html')" /> B. 对方不够主动</label>
+    <label><input type="radio" name="ans" value="3" onchange="goToNextPage('question7.html')" /> C. 表达不及时</label>
+    <label><input type="radio" name="ans" value="4" onchange="goToNextPage('question7.html')" /> D. 被忽视或冷落</label>
+
+    <script>
+        function goToNextPage(nextUrl) {
+            const selectedValue = document.querySelector('input[name="ans"]:checked').value;
+            let total = localStorage.getItem('score') || 0;
+            total = parseInt(total) + parseInt(selectedValue);
+            localStorage.setItem('score', total);
+            window.location.href = nextUrl;
+        }
+    </script>
+</body>
+</html>

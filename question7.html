@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>问题 7</title>
+    <style>
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: #fff9f9;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        h2 {
+            color: #e75480;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 22px;
+        }
+        label {
+            display: block;
+            padding: 14px;
+            margin: 12px 0;
+            background: #fff5f7;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        label:hover {
+            background: #ffebee;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <h2>当恋人和异性朋友走得很近，你的反应？</h2>
+    <label><input type="radio" name="ans" value="1" onchange="goToNextPage('question8.html')" /> A. 保持信任</label>
+    <label><input type="radio" name="ans" value="2" onchange="goToNextPage('question8.html')" /> B. 暗中观察，留心动向</label>
+    <label><input type="radio" name="ans" value="3" onchange="goToNextPage('question8.html')" /> C. 直接提出界限</label>
+    <label><input type="radio" name="ans" value="4" onchange="goToNextPage('question8.html')" /> D. 内心焦虑，想太多</label>
+
+    <script>
+        function goToNextPage(nextUrl) {
+            const selectedValue = document.querySelector('input[name="ans"]:checked').value;
+            let total = localStorage.getItem('score') || 0;
+            total = parseInt(total) + parseInt(selectedValue);
+            localStorage.setItem('score', total);
+            window.location.href = nextUrl;
+        }
+    </script>
+</body>
+</html>
