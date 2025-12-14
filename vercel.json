@@ -1,19 +1,59 @@
 {
   "version": 2,
   "routes": [
-    { "handle": "filesystem" },
-    
-    // love
-    { "src": "/love", "dest": "/love/index.html" },
-    { "src": "/love/(.*)", "dest": "/love/$1" },
-    
-    // color test
-    { "src": "/colortest", "dest": "/colortest/index.html" },
-    { "src": "/colortest/(.*)", "dest": "/colortest/$1" },
-    
-    // 可继续添加更多...
-    
-    // 根路径重定向到索引页（可选）
-    { "src": "/", "status": 307, "headers": { "Location": "/index.html" } }
+    {
+      "handle": "filesystem"
+    },
+
+    // ============= 已存在的测试 =============
+    {
+      "src": "/love",
+      "dest": "/love/index.html"
+    },
+    {
+      "src": "/love/(?<path>.*)",
+      "dest": "/love/(?<path>.*)"
+    },
+
+    // ============= 未来可添加的测试（示例） =============
+    {
+      "src": "/color",
+      "dest": "/color/index.html"
+    },
+    {
+      "src": "/color/(?<path>.*)",
+      "dest": "/color/(?<path>.*)"
+    },
+
+    {
+      "src": "/quiz",
+      "dest": "/quiz/index.html"
+    },
+    {
+      "src": "/quiz/(?<path>.*)",
+      "dest": "/quiz/(?<path>.*)"
+    },
+
+    {
+      "src": "/personality",
+      "dest": "/personality/index.html"
+    },
+    {
+      "src": "/personality/(?<path>.*)",
+      "dest": "/personality/(?<path>.*)"
+    },
+
+    // ============= 根路径：显示主页（可选） =============
+    {
+      "src": "/",
+      "dest": "/index.html"
+    },
+
+    // ============= 可选：自定义 404 页面 =============
+    {
+      "src": "/(.*)",
+      "status": 404,
+      "dest": "/404.html"
+    }
   ]
 }
