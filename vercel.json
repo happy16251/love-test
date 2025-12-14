@@ -3,9 +3,9 @@
   "routes": [
     { "handle": "filesystem" },
     
-    // love test
-    { "src": "/lovetest", "dest": "/lovetest/index.html" },
-    { "src": "/lovetest/(.*)", "dest": "/lovetest/$1" },
+    // love
+    { "src": "/love", "dest": "/love/index.html" },
+    { "src": "/love/(.*)", "dest": "/love/$1" },
     
     // color test
     { "src": "/colortest", "dest": "/colortest/index.html" },
