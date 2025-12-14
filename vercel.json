@@ -1,54 +1,58 @@
 {
   "version": 2,
   "routes": [
+    // ============= 1. 强制添加尾部斜杠（关键！） =============
+    {
+      "src": "/love$",
+      "headers": { "Location": "/love/" },
+      "status": 308
+    },
+    {
+      "src": "/color$",
+      "headers": { "Location": "/color/" },
+      "status": 308
+    },
+    {
+      "src": "/quiz$",
+      "headers": { "Location": "/quiz/" },
+      "status": 308
+    },
+    {
+      "src": "/personality$",
+      "headers": { "Location": "/personality/" },
+      "status": 308
+    },
+
+    // ============= 2. 文件系统处理 =============
     {
       "handle": "filesystem"
     },
 
-
+    // ============= 3. 路由回退（确保 /love/xxx 能加载静态资源） =============
     {
-      "src": "/love",
-      "dest": "/love/index.html"
+      "src": "/love/(.*)",
+      "dest": "/love/$1"
     },
     {
-      "src": "/love/(?<path>.*)",
-      "dest": "/love/(?<path>.*)"
-    },
-
-    {
-      "src": "/color",
-      "dest": "/color/index.html"
+      "src": "/color/(.*)",
+      "dest": "/color/$1"
     },
     {
-      "src": "/color/(?<path>.*)",
-      "dest": "/color/(?<path>.*)"
-    },
-
-    {
-      "src": "/quiz",
-      "dest": "/quiz/index.html"
+      "src": "/quiz/(.*)",
+      "dest": "/quiz/$1"
     },
     {
-      "src": "/quiz/(?<path>.*)",
-      "dest": "/quiz/(?<path>.*)"
+      "src": "/personality/(.*)",
+      "dest": "/personality/$1"
     },
 
-    {
-      "src": "/personality",
-      "dest": "/personality/index.html"
-    },
-    {
-      "src": "/personality/(?<path>.*)",
-      "dest": "/personality/(?<path>.*)"
-    },
-
-
+    // ============= 4. 根路径主页 =============
     {
       "src": "/",
       "dest": "/index.html"
     },
 
-
+    // ============= 5. 自定义 404 =============
     {
       "src": "/(.*)",
       "status": 404,
