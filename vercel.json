@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "routes": [
+    { "handle": "filesystem" },
+    
+    // love test
+    { "src": "/lovetest", "dest": "/lovetest/index.html" },
+    { "src": "/lovetest/(.*)", "dest": "/lovetest/$1" },
+    
+    // color test
+    { "src": "/colortest", "dest": "/colortest/index.html" },
+    { "src": "/colortest/(.*)", "dest": "/colortest/$1" },
+    
+    // 可继续添加更多...
+    
+    // 根路径重定向到索引页（可选）
+    { "src": "/", "status": 307, "headers": { "Location": "/index.html" } }
+  ]
+}
