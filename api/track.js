@@ -1,4 +1,17 @@
 // api/track.js
+/* eslint-disable */
+// @ts-nocheck
+// Force Node.js runtime
+export const config = {
+  runtime: 'nodejs',
+};
+
+const { kv } = require('@vercel/kv');
+
+module.exports = async function handler(req, res) {
+  // ... 你的代码（继续使用 req.body）
+};
+// api/track.js
 const { kv } = require('@vercel/kv');
 
 module.exports = async function handler(req, res) {
