@@ -13,5 +13,27 @@
     <li><a href="/quiz">❓ 心理小测验</a></li>
     <li><a href="/personality">👥 MBTI人格测试</a></li>
   </ul>
+  <!-- 数据埋点 -->
+<script>
+async function track(event, testId, result) {
+  try {
+    await fetch('/api/track', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ event, testId, result })
+    });
+  } catch (e) {
+    // 静默失败，不影响用户
+  }
+}
+
+// 页面加载时记录访问
+track('view', 'love');
+
+// 调用此函数来记录“测试完成”，传入你的结果类型
+function recordTestCompletion(resultType) {
+  track('complete', 'love', resultType);
+}
+</script>
 </body>
 </html>
