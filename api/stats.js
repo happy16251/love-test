@@ -1,4 +1,15 @@
 // api/stats.js
+export const config = { runtime: 'nodejs' };
+
+const { kv } = require('@vercel/kv');
+
+module.exports = async function handler(req, res) {
+  console.log('✅ stats.js 被调用了！');
+  console.log('URL:', process.env.UPSTASH_REDIS_REST_URL);
+  console.log('Token exists:', !!process.env.UPSTASH_REDIS_REST_TOKEN);
+
+  try {
+  // api/stats.js
 // 强制使用 Node.js 运行时（必须！）
 export const config = {
   runtime: 'nodejs',
@@ -63,6 +74,12 @@ module.exports = async function handler(req, res) {
 
   } catch (error) {
     console.error('Stats error:', error.message || error);
+    res.status(500).json({ error: '统计接口出错' });
+  }
+};
+
+  } catch (error) {
+    console.error('💥 Stats error:', error.message || error);
     res.status(500).json({ error: '统计接口出错' });
   }
 };
