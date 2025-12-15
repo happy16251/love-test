@@ -186,5 +186,12 @@
             `;
         };
     </script>
+    <script>
+// 假设 URL 是 /love/result.html?type=浪漫型
+const urlParams = new URLSearchParams(window.location.search);
+const resultType = urlParams.get('type') || '未知类型';
+recordTestCompletion(resultType);
+</script>
 </body>
+
 </html>
