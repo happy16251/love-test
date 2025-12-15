@@ -1,1 +1,8 @@
-
+{
+  "name": "psychtest",
+  "version": "1.0.0",
+  "description": "心理测试平台",
+  "dependencies": {
+    "@vercel/kv": "^1.0.0"
+  }
+}
