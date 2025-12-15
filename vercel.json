@@ -1,63 +1,19 @@
 {
   "version": 2,
   "routes": [
- 
-    {
-      "src": "/love$",
-      "headers": { "Location": "/love/" },
-      "status": 308
-    },
-    {
-      "src": "/color$",
-      "headers": { "Location": "/color/" },
-      "status": 308
-    },
-    {
-      "src": "/quiz$",
-      "headers": { "Location": "/quiz/" },
-      "status": 308
-    },
-    {
-      "src": "/personality$",
-      "headers": { "Location": "/personality/" },
-      "status": 308
-    },
+    // 🔑 API 路由：必须放在最前面！
+    { "src": "/api/(.*)", "dest": "/api/$1" },
 
- 
-    {
-      "handle": "filesystem"
-    },
+    // 🧪 你的心理测试页面（按需保留或添加）
+    { "src": "/love/(.*)", "dest": "/love/$1" },
+    { "src": "/color/(.*)", "dest": "/color/$1" },
+    { "src": "/quiz/(.*)", "dest": "/quiz/$1" },
+    { "src": "/personality/(.*)", "dest": "/personality/$1" },
 
-   
-    {
-      "src": "/love/(.*)",
-      "dest": "/love/$1"
-    },
-    {
-      "src": "/color/(.*)",
-      "dest": "/color/$1"
-    },
-    {
-      "src": "/quiz/(.*)",
-      "dest": "/quiz/$1"
-    },
-    {
-      "src": "/personality/(.*)",
-      "dest": "/personality/$1"
-    },
+    // 🏠 根路径（访问 https://www.psychtest.site/ 时显示首页）
+    { "src": "/", "dest": "/index.html" },
 
-
-    {
-      "src": "/",
-      "dest": "/index.html"
-    },
-
-
-    {
-      "src": "/(.*)",
-      "status": 404,
-      "dest": "/404.html"
-    }
+    // 📁 其他静态文件兜底（比如 /about.html）
+    { "src": "/(.*)", "dest": "/$1" }
   ]
 }
-
