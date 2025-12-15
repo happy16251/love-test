@@ -1,1 +1,63 @@
+{
+  "version": 2,
+  "routes": [
+ 
+    {
+      "src": "/love$",
+      "headers": { "Location": "/love/" },
+      "status": 308
+    },
+    {
+      "src": "/color$",
+      "headers": { "Location": "/color/" },
+      "status": 308
+    },
+    {
+      "src": "/quiz$",
+      "headers": { "Location": "/quiz/" },
+      "status": 308
+    },
+    {
+      "src": "/personality$",
+      "headers": { "Location": "/personality/" },
+      "status": 308
+    },
+
+ 
+    {
+      "handle": "filesystem"
+    },
+
+   
+    {
+      "src": "/love/(.*)",
+      "dest": "/love/$1"
+    },
+    {
+      "src": "/color/(.*)",
+      "dest": "/color/$1"
+    },
+    {
+      "src": "/quiz/(.*)",
+      "dest": "/quiz/$1"
+    },
+    {
+      "src": "/personality/(.*)",
+      "dest": "/personality/$1"
+    },
+
+
+    {
+      "src": "/",
+      "dest": "/index.html"
+    },
+
+
+    {
+      "src": "/(.*)",
+      "status": 404,
+      "dest": "/404.html"
+    }
+  ]
+}
 
