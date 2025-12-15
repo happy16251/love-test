@@ -1,1 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>📊 心理测试数据统计</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+    .container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; }
+    h1 { text-align: center; color: #333; }
+    pre { background: #eee; padding: 15px; border-radius: 5px; overflow-x: auto; }
+    .loading { text-align: center; color: #666; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧠 心理测试数据统计</h1>
+    <div id="content" class="loading">正在加载数据...</div>
+  </div>
 
+  <script>
+    fetch('/api/stats')
+      .then(response => {
+        if (!response.ok) throw new Error('网络错误');
+        return response.json();
+      })
+      .then(data => {
+        document.getElementById('content').innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+      })
+      .catch(err => {
+        document.getElementById('content').innerHTML = '<p style="color:red;">❌ 加载失败: ' + err.message + '</p>';
+      });
+  </script>
+</body>
+</html>
