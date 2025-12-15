@@ -7,7 +7,14 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    const body = await req.json();
+    // ✅ 使用 req.body，而不是 req.json()
+    let body;
+    if (typeof req.body === 'string') {
+      body = JSON.parse(req.body);
+    } else {
+      body = req.body;
+    }
+
     const { event, testId, result } = body;
 
     if (!event || !testId) {
