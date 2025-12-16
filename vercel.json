@@ -1,9 +1,5 @@
 {
   "version": 2,
-  "functions": {
-    "api/stats.js": { "runtime": "nodejs18.x" },
-    "api/track.js": { "runtime": "nodejs18.x" }
-  },
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/$1" },
     { "src": "/love/(.*)", "dest": "/love/$1" },
