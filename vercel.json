@@ -2,14 +2,9 @@
   "version": 2,
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/$1" },
-
     { "src": "/love/(.*)", "dest": "/love/$1" },
     { "src": "/color/(.*)", "dest": "/color/$1" },
     { "src": "/quiz/(.*)", "dest": "/quiz/$1" },
-    { "src": "/personality/(.*)", "dest": "/personality/$1" },
-
-    { "src": "/", "dest": "/index.html" },
-
-    { "src": "/(.*)", "dest": "/$1" }
+    { "src": "/", "dest": "/index.html" }
   ]
 }
