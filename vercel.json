@@ -1,19 +1,15 @@
 {
   "version": 2,
   "routes": [
-    // 👇 必须放在最前面！优先处理 API
     { "src": "/api/(.*)", "dest": "/api/$1" },
 
-    // 🧪 测试页面
     { "src": "/love/(.*)", "dest": "/love/$1" },
     { "src": "/color/(.*)", "dest": "/color/$1" },
     { "src": "/quiz/(.*)", "dest": "/quiz/$1" },
     { "src": "/personality/(.*)", "dest": "/personality/$1" },
 
-    // 🏠 根路径
     { "src": "/", "dest": "/index.html" },
 
-    // 📁 其他静态文件兜底（关键！）
     { "src": "/(.*)", "dest": "/$1" }
   ]
 }
