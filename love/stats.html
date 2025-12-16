@@ -3,33 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>📊 心理测试数据统计</title>
+  <title>爱情测试 - 统计数据</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
-    .container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; }
-    h1 { text-align: center; color: #333; }
-    pre { background: #eee; padding: 15px; border-radius: 5px; overflow-x: auto; }
-    .loading { text-align: center; color: #666; }
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
+    .card { background: white; padding: 20px; margin: 10px 0; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    h1 { color: #e74c3c; }
+    .metric { display: inline-block; margin-right: 20px; }
+    .result-item { margin: 5px 0; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🧠 心理测试数据统计</h1>
-    <div id="content" class="loading">正在加载数据...</div>
-  </div>
+  <h1>爱情测试 - 实时统计数据</h1>
+  <div id="stats">加载中...</div>
 
   <script>
-    fetch('/api/stats')
-      .then(response => {
-        if (!response.ok) throw new Error('网络错误');
-        return response.json();
-      })
-      .then(data => {
-        document.getElementById('content').innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
-      })
-      .catch(err => {
-        document.getElementById('content').innerHTML = '<p style="color:red;">❌ 加载失败: ' + err.message + '</p>';
-      });
+    async function loadStats() {
+      try {
+        const res = await fetch('/api/stats');
+        const data = await res.json();
+        const stats = data.love;
+
+        document.getElementById('stats').innerHTML = `
+          <div class="card">
+            <div class="metric">总访问量: <strong>${stats.views}</strong></div>
+            <div class="metric">完成测试: <strong>${stats.completions}</strong></div>
+            <div class="metric">转化率: <strong>${stats.conversionRate}%</strong></div>
+          </div>
+          <div class="card">
+            <h3>各结果出现次数:</h3>
+            ${Object.entries(stats.results).map(([key, count]) => 
+              `<div class="result-item">${key}: <strong>${count}</strong> 次</div>`
+            ).join('') || '<p>暂无结果数据</p>'}
+          </div>
+          <button onclick="location.reload()">刷新数据</button>
+        `;
+      } catch (err) {
+        document.getElementById('stats').innerHTML = '<p style="color:red;">加载失败，请稍后重试。</p>';
+      }
+    }
+
+    loadStats();
   </script>
 </body>
 </html>
