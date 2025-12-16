@@ -40,7 +40,6 @@
             width: 100%;
         }
 
-        /* 图片容器：固定 1136x1472 比例 */
         .image-wrapper {
             position: relative;
             width: 100%;
@@ -108,6 +107,19 @@
     </div>
 
     <script>
+        // ✅ 埋点函数（与 index.html 一致）
+        async function track(event, test, result) {
+            try {
+                await fetch('/api/track', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ event, test, result })
+                });
+            } catch (e) {
+                // 静默失败
+            }
+        }
+
         window.onload = function() {
             const score = parseInt(localStorage.getItem('score')) || 0;
             localStorage.removeItem('score');
@@ -115,7 +127,7 @@
             let title, descHtml, imgSrc;
 
             if (score >= 8 && score <= 13) {
-                title = "温柔忍者 ❤️";
+                title = "温柔忍者";
                 descHtml = `
                     <h3>温和、善解人意、顾全大局</h3>
                     <p>在恋爱关系中，你总是试图理解对方的感受并尽量避免冲突。你擅长倾听，能够站在对方的角度思考问题。</p>
@@ -128,7 +140,7 @@
                 `;
                 imgSrc = "result-image1.jpg";
             } else if (score >= 14 && score <= 19) {
-                title = "小心机 🧠";
+                title = "小心机";
                 descHtml = `
                     <h3>有策略、心思细腻、擅长暗中观察</h3>
                     <p>你在恋爱中往往是一个细心观察者，善于捕捉到对方的情绪变化。你倾向于通过间接方式解决问题，避免正面冲突。</p>
@@ -141,7 +153,7 @@
                 `;
                 imgSrc = "result-image2.jpg";
             } else if (score >= 20 && score <= 25) {
-                title = "直白表达 🔥";
+                title = "直白表达";
                 descHtml = `
                     <h3>直接、坦率、勇于表达</h3>
                     <p>你习惯于直接了当地说出自己的想法和感受，这种坦诚的态度让人感觉很真实。你不喜欢拐弯抹角，喜欢把事情说清楚。</p>
@@ -154,7 +166,7 @@
                 `;
                 imgSrc = "result-image3.jpg";
             } else if (score >= 26 && score <= 32) {
-                title = "情绪敏感 🌧️";
+                title = "情绪敏感";
                 descHtml = `
                     <h3>敏感、细腻、感情丰富</h3>
                     <p>你对周围环境的变化有着敏锐的感知力，在恋爱中尤其注重情感上的连接。你很容易察觉到伴侣的情绪波动，并给予支持。</p>
@@ -172,6 +184,7 @@
                 imgSrc = "cover-image.jpg";
             }
 
+            // 渲染页面
             document.getElementById('content').innerHTML = `
                 <h2>${title}</h2>
                 <div class="center-wrapper">
@@ -184,14 +197,12 @@
                 </div>
                 <button class="retry-link" onclick="location.href='index.html'">再测一次</button>
             `;
+
+            // ✅ 关键：页面渲染完成后，发送“完成”埋点！
+            if (title !== "测试异常") {
+                track('complete', 'love', title);
+            }
         };
     </script>
-    <script>
-// 假设 URL 是 /love/result.html?type=浪漫型
-const urlParams = new URLSearchParams(window.location.search);
-const resultType = urlParams.get('type') || '未知类型';
-recordTestCompletion(resultType);
-</script>
 </body>
-
 </html>
