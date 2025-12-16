@@ -3,27 +3,32 @@ const { kv } = require('@vercel/kv');
 
 module.exports = async function handler(req, res) {
   try {
-    await kv.ping(); // 测试 Redis 连接
-    
-    const stats = {};
     const tests = ['love', 'color', 'quiz', 'personality'];
-    
+    const stats = {};
+
     for (const test of tests) {
-      const views = await kv.get(`${test}:views`) || 0;
-      const completions = await kv.get(`${test}:completions`) || 0;
+      const views = Number(await kv.get(`${test}:views`) || 0);
+      const completions = Number(await kv.get(`${test}:completions`) || 0);
       const results = await kv.hgetall(`${test}:results`) || {};
+
+      // 转换结果为数字
+      const numericResults = {};
+      for (const [key, value] of Object.entries(results)) {
+        numericResults[key] = Number(value);
+      }
 
       stats[test] = {
         views,
         completions,
-        conversionRate: views > 0 ? `${Math.round((completions / views) * 100)}%` : '0%',
-        results
+        conversionRate: views > 0 ? Math.round((completions / views) * 100) : 0,
+        results: numericResults
       };
     }
 
+    res.setHeader('Cache-Control', 'no-cache');
     res.status(200).json(stats);
   } catch (error) {
-    console.error('Error:', error.message);
-    res.status(500).json({ error: '服务器内部错误' });
+    console.error('Stats error:', error.message);
+    res.status(500).json({ error: 'Failed to fetch stats' });
   }
 };
