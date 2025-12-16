@@ -3,8 +3,7 @@ const { kv } = require('@vercel/kv');
 
 module.exports = async function handler(req, res) {
   try {
-    // 测试 Redis
-    await kv.ping();
+    await kv.ping(); // 测试 Redis 连接
     
     const stats = {};
     const tests = ['love', 'color', 'quiz', 'personality'];
